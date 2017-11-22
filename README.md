@@ -6,7 +6,7 @@
 
 In this project, I tried two different methods to classify flower photoes. Firstly, I trained and evaluated a CNN model with training and validation sets, the validation accuracy is about 78%, which is not good enough. Training an entire CNN model from scratch could not achive a satisfactory performance since we only had limited data (2500+ for training and 500+ for validation). So I considered to use a pretrained model with a large scale of data, and treated the last layer output as initialization for my prediction model. With the help of this transfer learning workflow, my validation accuracy increased to 90%.
 
-### II. Stage 1: Training a CNN model with random initialization
+## II. Stage 1: Train a random initialization CNN
 
 #### a. Pre-processing
 
@@ -44,7 +44,7 @@ __Drop-out__ : I set a lower drop-out rate to avoid overfitting at the first 4 p
 
 the final validation accuracy is 78%
 
-### III. Stage 2: Transfer learning
+## III. Stage 2: Transfer learning
 
 Since the performance for CNN model is not good enough, then I considered to use transfer learning method (see reference) to make some improvement. I use the code provided by tensorflow's Github, loading a pre-trained Inception v3 model.
 
@@ -63,7 +63,7 @@ No special preprocessing stage in my transfer learning model, just follow Incept
 
 the final validation accuracy is 90%
 
-### IV. Model selection and evaluation
+## IV. Model selection and evaluation
 
 You can use my transfer learning model prediciton output for grading since it achieved higher validation accuracy. Meanwhile, I list the evaluation result on validation set for those two methods:
 
@@ -93,7 +93,7 @@ Transfer learning with Tenserflow:
 avg / total       0.90      0.90      0.90       550
 ```
 
-### V. Reference
+## V. Reference
 
 1. Keras: https://github.com/fchollet/keras/blob/master/examples/cifar10_cnn.py
 2. Transfer learning: <https://www.tensorflow.org/tutorials/image_retraining>
