@@ -663,6 +663,8 @@ if __name__ == '__main__':
     incp_model_dir = '../TransferLearning'
     bottleneck_dir = '../TransferLearning/bottleneck'
     final_tensor_name = 'final_result'
+
+    # Please give the path for test photoes
     prediction_img_dir = '/Users/yanyunliu/PycharmProjects/TensorFlowTutorial/MSBD6000BProject2/TransferLearning/test'
 
     testfile_dir = 'test.txt'
