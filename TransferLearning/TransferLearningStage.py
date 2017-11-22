@@ -660,8 +660,8 @@ if __name__ == '__main__':
 
     image_dir = '/Users/yanyunliu/PycharmProjects/TensorFlowTutorial/data/flower_photos'
     model_dir = 'TFModel'
-    incp_model_dir = '../TransferLearning'
-    bottleneck_dir = '../TransferLearning/bottleneck'
+    incp_model_dir = '.'
+    bottleneck_dir = 'bottleneck'
     final_tensor_name = 'final_result'
 
     # Please give the path for test photoes
@@ -669,13 +669,13 @@ if __name__ == '__main__':
 
     testfile_dir = 'test.txt'
 
-    num_steps = 1500
+    num_steps = 15000
     learning_rate = 0.01
 
 
     get_prediction('transfer_learning_predict')
 
-    Convert_prediction_to_array('transfer_learning_predict_test',
+    Convert_prediction_to_array('transfer_learning_predict',
                                 testfile_dir, output_name='project2_20384933.txt')
 
 
