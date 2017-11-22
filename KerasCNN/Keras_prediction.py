@@ -1,6 +1,7 @@
 from keras.models import load_model
 import numpy as np
-from Loading_data import LoadImage2Array
+from PreprocessingStage import LoadTestImage2Array
+from PredictionStage import Get_prediction
 import keras
 
 
@@ -18,15 +19,11 @@ model = load_model('/Users/yanyunliu/PycharmProjects/TensorFlowTutorial/MSBD6000
 # print scores
 
 
-test_data, test_label = LoadImage2Array('/Users/yanyunliu/PycharmProjects/TensorFlowTutorial/data/sample_truth_onelabel.txt', image_size = 32, use_gray = False, use_keras = True)
+test_data = LoadTestImage2Array('/Users/yanyunliu/PycharmProjects/TensorFlowTutorial/data/test.txt', image_size = 32, use_gray = False, use_keras = True)
 
-test_label = keras.utils.to_categorical(test_label, num_classes)
 test_data = test_data.astype('float32')
 test_data /= 255
-test_label = keras.utils.to_categorical(test_label, num_classes)
 
-# scores = model.evaluate(test_data,test_label, verbose=1)
-# scores = model.evaluate(test_data,test_label, verbose=1)
 print model.predict(test_data)
 prediction_model = model.predict(test_data)
 
