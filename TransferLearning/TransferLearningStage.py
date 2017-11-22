@@ -484,14 +484,15 @@ def make_image_predictions(
 
     if not labels_list:
         output_labels_file = os.path.join(model_dir, LABELS_FILENAME)
-    if gfile.Exists(output_labels_file):
-        with open(output_labels_file, 'r') as lfile:
-            labels_string = lfile.read()
-            labels_list = json.loads(labels_string)
-            print("labels list: %s" % labels_list)
-    else:
-        print("Labels list %s not found" % output_labels_file)
-        return None
+
+        if gfile.Exists(output_labels_file):
+            with open(output_labels_file, 'r') as lfile:
+                labels_string = lfile.read()
+                labels_list = json.loads(labels_string)
+                print("labels list: %s" % labels_list)
+        else:
+            print("Labels list %s not found" % output_labels_file)
+            return None
 
     sess = tf.Session()
     bottlenecks = []
@@ -639,6 +640,14 @@ def get_prediction(output_filename ='transfer_learning_predict'):
     print(classifier.evaluate(
         val_bottlenecks.astype(np.float32), val_ground_truth, metrics=METRICS))
 
+    output_labels_file = os.path.join(model_dir, LABELS_FILENAME)
+    if gfile.Exists(output_labels_file):
+      print("Labels list file already exists; not writing.")
+    else:
+      output_labels = json.dumps(list(image_lists.keys()))
+      with gfile.FastGFile(output_labels_file, 'w') as f:
+        f.write(output_labels)
+
     print("\nPredicting...")
     img_list = get_prediction_images(prediction_img_dir)
     if not img_list:
@@ -657,8 +666,8 @@ def get_prediction(output_filename ='transfer_learning_predict'):
 if __name__ == '__main__':
 
     # Please give the path for data file flower_photos
-
     image_dir = '/Users/yanyunliu/PycharmProjects/TensorFlowTutorial/data/flower_photos'
+
     model_dir = 'TFModel'
     incp_model_dir = '.'
     bottleneck_dir = 'bottleneck'
@@ -673,9 +682,9 @@ if __name__ == '__main__':
     learning_rate = 0.01
 
 
-    get_prediction('transfer_learning_predict')
+    get_prediction('transfer_learning_predict_test')
 
-    Convert_prediction_to_array('transfer_learning_predict',
-                                testfile_dir, output_name='project2_20384933.txt')
+    Convert_prediction_to_array('transfer_learning_predict_test',
+                                testfile_dir, output_name='project2_20384933_test.txt')
 
 
