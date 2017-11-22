@@ -46,13 +46,17 @@ def ParseTestImageFile(file_path):
     return file_list
 
 
-def LoadImage2Array(file_path, image_size = 32, use_gray = False, use_keras = True):
+def LoadImage2Array(file_path, data_path, image_size = 32, use_gray = False, use_keras = True):
 
 
 
     file_list, label_list = ParseImageFile(file_path)
 
-    os.chdir('/Users/yanyunliu/PycharmProjects/TensorFlowTutorial/data')
+    current_path = os.getcwd()
+
+    print current_path
+
+    os.chdir(data_path)
 
     image_list = []
 
@@ -107,6 +111,8 @@ def LoadImage2Array(file_path, image_size = 32, use_gray = False, use_keras = Tr
     print('there is label')
     print(label_list)
 
+    os.chdir(current_path)
+
     return image_list, label_list
 
 def next_batch(num, data, labels):
@@ -124,13 +130,15 @@ def next_batch(num, data, labels):
 
     return np.asarray(data_shuffle), np.asarray(labels_shuffle)
 
-def LoadTestImage2Array(file_path, image_size = 32, use_gray = False, use_keras = True):
+def LoadTestImage2Array(file_path, data_path, image_size = 32, use_gray = False, use_keras = True):
 
 
 
     file_list = ParseTestImageFile(file_path)
 
-    os.chdir('/Users/yanyunliu/PycharmProjects/TensorFlowTutorial/data')
+    current_path = os.getcwd()
+
+    os.chdir(data_path)
 
     image_list = []
 
@@ -163,14 +171,12 @@ def LoadTestImage2Array(file_path, image_size = 32, use_gray = False, use_keras 
 
 
     image_list = np.array(image_list)
+
     print(image_list.shape, image_list[0].shape)
-
     t2 = time.time()
-
     print(t2 - t1)
 
-
-
+    os.chdir(current_path)
 
     return image_list
 
