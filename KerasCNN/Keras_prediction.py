@@ -1,7 +1,8 @@
 from keras.models import load_model
 import numpy as np
-from PreprocessingStage import LoadTestImage2Array
+from PreprocessingStage import LoadTestImage2Array, LoadImage2Array
 from PredictionStage import Get_prediction
+from sklearn.metrics import classification_report
 import keras
 
 
@@ -19,15 +20,20 @@ model = load_model('/Users/yanyunliu/PycharmProjects/TensorFlowTutorial/MSBD6000
 # print scores
 
 
-test_data = LoadTestImage2Array('/Users/yanyunliu/PycharmProjects/TensorFlowTutorial/data/test.txt', image_size = 32, use_gray = False, use_keras = True)
+test_data,  test_label = LoadImage2Array('/Users/yanyunliu/PycharmProjects/TensorFlowTutorial/data/val.txt', image_size = 32, use_gray = False, use_keras = True)
 
 test_data = test_data.astype('float32')
 test_data /= 255
 
 print model.predict(test_data)
 prediction_model = model.predict(test_data)
+prediction_model = prediction_model.argmax(axis=-1)
 
-np.savetxt("keras_prediction.txt", np.array(prediction_model), "%1.0f")
+target_names = ['class 0', 'class 1', 'class 2','class 3', 'class 4']
+
+print classification_report(test_label.ravel(), np.array(prediction_model).ravel(), target_names=target_names)
+
+np.savetxt("keras_validation.txt", np.array(prediction_model), "%1.0f")
 
 # train_data, train_label = LoadImage2Array('/disk02/data/eLearning/yyliu/DeepLearningProject/train.txt', image_size = 32, use_gray = False, use_keras = True)
 #

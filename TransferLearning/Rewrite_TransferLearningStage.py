@@ -23,7 +23,7 @@ from tensorflow.python.platform import gfile
 from tensorflow.python.util import compat
 from tensorflow.contrib.learn.python.learn import metric_spec
 from tensorflow.contrib.metrics.python.ops import metric_ops
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import classification_report
 
 FLAGS = tf.app.flags.FLAGS
 LABELS_FILENAME = "output_labels.json"
@@ -656,6 +656,7 @@ def main():
     print(val_bottlenecks.shape)
 
     val_ground_truth = np.array(val_ground_truth)
+
     print("evaluating....")
     print(classifier.evaluate(
         val_bottlenecks.astype(np.float32), val_ground_truth, metrics=METRICS))
@@ -687,6 +688,7 @@ if __name__ == '__main__':
     bottleneck_dir = '/Users/yanyunliu/PycharmProjects/TensorFlowTutorial/MSBD6000BProject2/TransferLearning'
     final_tensor_name = 'final_result'
     prediction_img_dir = '/Users/yanyunliu/PycharmProjects/TensorFlowTutorial/data/flower_photos/test'
+    # prediction_img_dir = '/Users/yanyunliu/PycharmProjects/TensorFlowTutorial/data/flower_photos/test'
     num_steps = 15000
     learning_rate = 0.01
 
