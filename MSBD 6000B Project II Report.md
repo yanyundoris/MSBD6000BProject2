@@ -67,6 +67,11 @@ the final validation accuracy is 90%
 
 You can use my transfer learning model prediciton for grading since it achieves more higher accuracy. Meanwhile, I list the evaluation result on validation set for those two models:
 
+### V. Reference
+
+1. Keras: https://github.com/fchollet/keras/blob/master/examples/cifar10_cnn.py
+2. Transfer learning: <https://www.tensorflow.org/tutorials/image_retraining>
+
 
 
 
